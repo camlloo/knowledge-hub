@@ -1,0 +1,32 @@
+# dev 环境配置模板：复制为 application-dev.yml 后填入虚拟机实际值
+#   cp application-dev.yml.example application-dev.yml
+# 注意：application-dev.yml 含真实密码，已被 .gitignore 排除，不会进入仓库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.150.101:3306/knowledge_hub?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+    username: root              # MySQL 账号
+    password: your-password     # MySQL 密码
+  data:
+    redis:
+      host: 192.168.150.101
+      port: 6379
+      password: your-redis-password   # 无密码则留空字符串
+      database: 0
+
+# 业务自定义配置
+kh:
+  minio:
+    endpoint: http://192.168.150.101:9000
+    access-key: your-access-key     # MinIO 账号
+    secret-key: your-secret-key     # MinIO 密码
+    bucket: knowledge-hub           # 桶需在 MinIO 控制台(9001端口)预先创建
+  jwt:
+    secret: replace-with-random-secret-min-32bytes   # 生成方式: openssl rand -hex 32
+    access-token-ttl: 2h
+    refresh-token-ttl: 168h         # 7 天
+    issuer: knowledge-hub
+
+logging:
+  level:
+    com.kh: debug

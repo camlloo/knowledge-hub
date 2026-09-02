@@ -1,0 +1,33 @@
+# ===== knowledge-hub 后端 =====
+
+# 构建产物
+target/
+build/
+out/
+
+# 含真实密码的本地环境配置（仓库保留 application-dev.yml.example 模板）
+# 克隆后：cp src/main/resources/application-dev.yml.example src/main/resources/application-dev.yml
+src/main/resources/application-dev.yml
+src/main/resources/application-*.local.yml
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated*
+
+# 日志
+logs/
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 说明：mvnw / mvnw.cmd / .mvn/wrapper/maven-wrapper.properties 属于工程文件，需要提交

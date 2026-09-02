@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: knowledge-hub
+  profiles:
+    active: dev
+  # JDK 21 虚拟线程：AI/IO 密集型场景友好
+  threads:
+    virtual:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 520MB
+  flyway:
+    enabled: false   # 建表脚本先用 sql/init.sql 手动执行；阶段② 起可切到 db/migration 自动迁移
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# API 文档：springdoc 扫描 + Knife4j 增强 UI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+  # 单服务暂用一组；后期可按模块拆组（file/rag/agent...）
+  group-configs:
+    - group: default
+      display-name: 知识中枢接口
+      packages-to-scan: com.kh
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
