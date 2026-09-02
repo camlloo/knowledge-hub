@@ -35,7 +35,10 @@ cd knowledge-hub
 - OpenAPI JSON：`http://localhost:8080/api/v3/api-docs`
 - 健康检查：`http://localhost:8080/api/actuator/health`
 
-> 文档栈说明：knife4j 4.5.0（doc.html 增强UI）+ springdoc 2.3.0（knife4j 官方适配版本）。knife4j 4.5.0 与 springdoc 2.8.x 存在 `getGroupConfigs()` 方法不兼容（NoSuchMethodError），故 springdoc 锁定 2.3.0；文档右上角 Authorize 已预置 `Authorization` 请求头，阶段① JWT 完成后可直接在文档里带 token 调试。
+> 文档栈说明：springdoc 2.8.x（匹配 Boot 3.5/Spring 6.2，负责接口扫描与生成）+ knife4j 4.5.0（仅提供 doc.html 增强UI）。
+> 注意：knife4j 4.5.0 的自动配置与 springdoc 2.8.x 不兼容（NoSuchMethodError），故 `knife4j.enable=false` 只用其静态页面；
+> 而 knife4j 官方适配的 springdoc 2.3.0 在 Spring 6.2 下扫描不出任何接口，也不可用——两者版本是被这条兼容链锁死的，勿随意改动。
+> 文档右上角 Authorize 已预置 `Authorization` 请求头，登录后粘贴 accessToken 即可调试全部接口。
 
 ## 前端启动
 

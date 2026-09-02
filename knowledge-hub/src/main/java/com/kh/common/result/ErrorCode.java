@@ -23,6 +23,8 @@ public enum ErrorCode {
     USERNAME_EXISTS(1001, "用户名已存在"),
     LOGIN_FAILED(1002, "用户名或密码错误"),
     ACCOUNT_DISABLED(1003, "账号已被禁用"),
+    OLD_PASSWORD_ERROR(1004, "原密码不正确"),
+    NEW_PASSWORD_SAME(1005, "新密码不能与原密码相同"),
     UNAUTHORIZED(1010, "未登录或登录已过期"),
     REFRESH_TOKEN_INVALID(1011, "登录已失效，请重新登录"),
     FORBIDDEN(1020, "无权访问该资源"),

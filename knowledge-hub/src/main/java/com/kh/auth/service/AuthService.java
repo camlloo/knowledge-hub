@@ -20,4 +20,7 @@ public interface AuthService {
 
     /** 撤销 refreshToken（accessToken 等待自然过期，见接口文档说明） */
     void logout(RefreshRequest request);
+
+    /** 撤销指定用户全部 refreshToken（改密码全端踢下线；已签发 accessToken 残留窗口 ≤2h） */
+    void revokeAllSessions(Long userId);
 }

@@ -33,6 +33,7 @@ public class JwtUtils {
 
     public String createAccessToken(Long userId, String username) {
         Date now = new Date();
+        // 载荷声明：issuer 签发方 / subject=userId / username 自定义声明 / exp = now + TTL（2h）
         return Jwts.builder()
                 .issuer(issuer)
                 .subject(String.valueOf(userId))
@@ -46,16 +47,19 @@ public class JwtUtils {
     /** 解析 accessToken；过期/签名不符/格式错误一律返回 empty，不抛出 */
     public Optional<LoginUser> parseAccessToken(String token) {
         try {
+            // 验签 + 校验签发方 + 解析载荷；签名不符、过期、格式错误都会抛 JwtException/IllegalArgumentException
             Claims claims = Jwts.parser()
                     .verifyWith(key)
                     .requireIssuer(issuer)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
+            // 从载荷还原登录身份：subject 即 userId
             return Optional.of(new LoginUser(
                     Long.valueOf(claims.getSubject()),
                     claims.get("username", String.class)));
         } catch (JwtException | IllegalArgumentException e) {
+            // 无效令牌不抛出：调用方（JWT 过滤器）按匿名继续处理即可
             return Optional.empty();
         }
     }

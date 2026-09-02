@@ -30,7 +30,7 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-# API 文档：springdoc 扫描 + Knife4j 增强 UI
+# API 文档：springdoc 2.8.x 负责扫描与生成，knife4j 仅提供 doc.html 静态页面
 springdoc:
   api-docs:
     path: /v3/api-docs
@@ -43,10 +43,10 @@ springdoc:
       display-name: 知识中枢接口
       packages-to-scan: com.kh
 
+# knife4j 4.5.0 自动配置与 springdoc 2.8.x 不兼容（NoSuchMethodError），必须关闭；
+# doc.html 页面由 Boot 静态资源机制（classpath:/META-INF/resources）继续提供
 knife4j:
-  enable: true
-  setting:
-    language: zh_cn
+  enable: false
 
 management:
   endpoints:

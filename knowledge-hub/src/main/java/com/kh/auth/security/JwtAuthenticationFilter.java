@@ -29,16 +29,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+        // ① 只识别 Authorization: Bearer 头，且当前请求尚未携带身份（避免重复解析）
         String header = request.getHeader("Authorization");
         if (header != null && header.startsWith(BEARER_PREFIX)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
+            // ② 解析并校验 JWT：过期/签名不符/格式错误一律返回 empty，此处保持匿名、不做阻断
             jwtUtils.parseAccessToken(header.substring(BEARER_PREFIX.length()))
+                    // ③ 解析成功：包装为 Authentication 写入 SecurityContext（ThreadLocal，请求结束自动清理）
                     .ifPresent(user -> {
                         UsernamePasswordAuthenticationToken authentication =
                                 new UsernamePasswordAuthenticationToken(user, null, List.of());
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     });
         }
+        // ④ 无论是否认证成功都继续过滤链；"拒绝未认证请求"由 SecurityConfig 授权规则统一裁决（未认证 → code 1010）
         chain.doFilter(request, response);
     }
 }
