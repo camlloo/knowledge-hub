@@ -7,6 +7,7 @@ import com.kh.common.result.R;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,7 @@ import java.io.IOException;
  * <p>未认证响应与全局约定一致：HTTP 200 + R(code=1010)，由前端拦截器触发刷新/跳登录。
  * CORS 无需配置：开发期前端经 Vite 代理同源访问。
  */
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -64,6 +66,8 @@ public class SecurityConfig {
     /** 未认证（缺失/无效 accessToken）：写 R(code=1010) */
     private void writeUnauthorized(HttpServletRequest request, HttpServletResponse response,
                                    AuthenticationException e) throws IOException {
+        // 打印被拦截的具体请求，配合 JwtUtils 的 debug 日志可定位"已登录仍 1010"类问题
+        log.warn("拦截未认证请求: {} {}", request.getMethod(), request.getRequestURI());
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(R.fail(ErrorCode.UNAUTHORIZED)));

@@ -3,9 +3,12 @@
 </template>
 
 <style>
+/* 全局基础字体与底色走设计令牌（见 styles/tokens.css） */
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-  background-color: #f5f7fa;
+  font-family: var(--font-sans);
+  background: var(--room-deep);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 </style>

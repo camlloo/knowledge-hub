@@ -1,0 +1,62 @@
+@import './tokens.css';
+
+/* ---------- 全局基础 ---------- */
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--room-deep);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 数字与时间用等宽（表格数据） */
+.num { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.01em; }
+
+/* ---------- 晨光光池：内容区的呼吸底色（白为主，一层极淡的暖光） ---------- */
+.lamp-pool {
+  position: relative;
+  min-height: 100%;
+  background: var(--paper);
+}
+.lamp-pool::before,
+.lamp-pool::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity .7s ease;
+}
+/* 光池两层：表格模式光在左上（列表起点），网格模式光在正中 */
+.lamp-pool::before {
+  background: radial-gradient(1100px 640px at 18% -8%, #FBF9F1 0%, rgba(251, 249, 241, 0) 60%);
+  opacity: 1;
+}
+.lamp-pool::after {
+  background: radial-gradient(1100px 640px at 50% -10%, #FBF9F1 0%, rgba(251, 249, 241, 0) 60%);
+  opacity: 0;
+}
+.lamp-pool.grid-light::before { opacity: 0; }
+.lamp-pool.grid-light::after { opacity: 1; }
+.lamp-pool > * { position: relative; }
+
+/* ---------- 盖章动画（签名交互） ---------- */
+@keyframes stamp-in {
+  0%   { transform: scale(1.7) rotate(6deg); opacity: 0; }
+  55%  { transform: scale(0.94) rotate(-5deg); opacity: 1; }
+  75%  { transform: scale(1.04) rotate(-4deg); }
+  100% { transform: scale(1) rotate(-4deg); opacity: 1; }
+}
+.stamp-in { animation: stamp-in .38s cubic-bezier(.2, .8, .3, 1) both; }
+
+/* ---------- 品类默认绝不出现：全局去 EP 蓝 ---------- */
+.el-button--primary {
+  --el-button-bg-color: var(--brass);
+  --el-button-border-color: var(--brass-deep);
+  --el-button-hover-bg-color: var(--brass-hi);
+  --el-button-hover-border-color: var(--brass-deep);
+  --el-button-active-bg-color: var(--brass-deep);
+  color: #FFF9EC;
+}
+.el-dialog { border-radius: var(--radius); }
+.el-table { --el-table-bg-color: transparent; --el-table-tr-bg-color: transparent; }

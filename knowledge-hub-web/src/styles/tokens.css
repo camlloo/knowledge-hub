@@ -1,0 +1,105 @@
+/* ============================================================
+   晨光书房 · 设计令牌（浅色系，白色为主）
+   白桌面为底，墨色文字，黄铜是唯一金属件与主行动色，
+   印章红只留给危险与失败。状态是"标记"而非颜色。
+   ============================================================ */
+:root {
+  /* 骨架浅灰（侧栏/顶栏），与纯白内容区形成一层轻微分隔 */
+  --room-deep: #F7F6F1;
+  --room-green: #F2F1EA;
+  --room-panel: #EFEDE4;
+  --room-line: #E5E2D6;
+  --room-text: #3A3830;
+  --room-text-dim: #8A867A;
+
+  /* 纸面（内容区：白为主） */
+  --paper-bright: #FFFFFF;
+  --paper: #FFFFFF;
+  --paper-dim: #FAF9F4;
+  --paper-edge: #E8E4D8;
+
+  /* 墨水文字（暖墨而非纯灰） */
+  --ink: #26251F;
+  --ink-soft: #6E6A5C;
+  --ink-faint: #9A957F;
+
+  /* 黄铜（主行动/金属件）：加深以保证白底对比度 */
+  --brass: #8F7038;
+  --brass-hi: #A5854A;
+  --brass-deep: #755C2B;
+  --brass-wash: #F5EEDC;
+
+  /* 印章红（危险/失败专用） */
+  --seal: #8C3B2E;
+
+  /* 墨绿章（就绪/成功） */
+  --stamp-green: #2F6B4F;
+
+  /* 字体：中文系统栈；数据与编号用等宽（合法的数据用途） */
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+
+  /* 圆角与阴影（浅色系阴影更轻） */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow-paper: 0 1px 2px rgba(38, 37, 31, .05), 0 6px 20px rgba(38, 37, 31, .07);
+  --shadow-pop: 0 4px 12px rgba(38, 37, 31, .12), 0 16px 40px rgba(38, 37, 31, .16);
+
+  /* Element Plus 令牌重映射：黄铜为主色，印章红为危险色 */
+  --el-color-primary: #8F7038;
+  --el-color-primary-light-3: #A5854A;
+  --el-color-primary-light-5: #BCA173;
+  --el-color-primary-light-7: #D6C4A0;
+  --el-color-primary-light-8: #E4D8BE;
+  --el-color-primary-light-9: #F2EBDC;
+  --el-color-primary-dark-2: #755C2B;
+  --el-color-danger: #A0402E;
+  --el-color-danger-light-3: #B96655;
+  --el-color-danger-light-5: #CE9487;
+  --el-color-danger-light-7: #E2C2BA;
+  --el-color-danger-light-8: #ECD4CE;
+  --el-color-danger-light-9: #F5E8E4;
+  --el-color-success: #2F6B4F;
+  --el-color-warning: #A8823C;
+  --el-color-error: #A0402E;
+  --el-border-radius-base: 6px;
+  --el-text-color-primary: #26251F;
+  --el-text-color-regular: #4A473E;
+  --el-text-color-secondary: #6E6A5C;
+  --el-text-color-placeholder: #9A957F;
+  --el-border-color: #E0DCCC;
+  --el-border-color-light: #E8E4D8;
+  --el-border-color-lighter: #EFECE2;
+  --el-fill-color-blank: #FFFFFF;
+  --el-bg-color: #FFFFFF;
+  --el-bg-color-overlay: #FFFFFF;
+  --el-fill-color: #F5F4EE;
+  --el-fill-color-light: #F7F6F1;
+  --el-fill-color-lighter: #FAF9F4;
+  --el-font-family: var(--font-sans);
+}
+
+/* ---- 浏览器表面也属于设计：选区、光标、滚动条、焦点 ---- */
+::selection { background: #E3D3AC; color: #26251F; }
+
+.paper-scope { caret-color: var(--brass-deep); }
+.paper-scope ::selection { background: #E3D3AC; color: #26251F; }
+
+.paper-scope *::-webkit-scrollbar { width: 10px; height: 10px; }
+.paper-scope *::-webkit-scrollbar-thumb {
+  background: #DDD8C8; border-radius: 5px; border: 2px solid #FFFFFF;
+}
+.paper-scope *::-webkit-scrollbar-thumb:hover { background: #CBC5B0; }
+.paper-scope *::-webkit-scrollbar-track { background: transparent; }
+
+.dark-scope ::-webkit-scrollbar { width: 10px; }
+.dark-scope ::-webkit-scrollbar-thumb { background: #D5D1C2; border-radius: 5px; border: 2px solid #F7F6F1; }
+.dark-scope ::-webkit-scrollbar-track { background: transparent; }
+
+/* 键盘焦点环：黄铜双线 */
+.paper-scope :focus-visible,
+.dark-scope :focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

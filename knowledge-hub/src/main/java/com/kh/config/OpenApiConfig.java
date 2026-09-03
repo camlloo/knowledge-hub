@@ -28,12 +28,14 @@ public class OpenApiConfig {
                         .title("AI Knowledge Hub API")
                         .description("AI 原生知识文件管理系统 —— 阶段① 文件管理模块接口文档")
                         .version("v0.1.0"))
+                // HTTP Bearer 方案：文档 Authorize 中粘贴 accessToken 即可，请求头自动携带 "Bearer " 前缀。
+                // 注意不能用 APIKEY 方案——它把值原样放入请求头（不带 Bearer），会被 JWT 过滤器当成匿名导致 1010
                 .components(new Components().addSecuritySchemes(SECURITY_SCHEME_NAME,
                         new SecurityScheme()
-                                .type(SecurityScheme.Type.APIKEY)
-                                .in(SecurityScheme.In.HEADER)
-                                .name(SECURITY_SCHEME_NAME)
-                                .description("JWT 认证令牌，格式：Bearer {token}")))
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                                .description("登录接口返回的 accessToken，无需手动加 Bearer 前缀")))
                 .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME));
     }
 }

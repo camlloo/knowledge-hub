@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -15,9 +16,10 @@ import java.util.Date;
 import java.util.Optional;
 
 /**
- * accessToken 的签发与解析（HS256）。
+ * accessToken 的签发与解析（HS256/HS512，按密钥长度自动选择）。
  * 令牌本身无服务端状态，主动失效依赖 refreshToken 的 Redis 存储与短有效期。
  */
+@Slf4j
 @Component
 public class JwtUtils {
 
@@ -59,7 +61,8 @@ public class JwtUtils {
                     Long.valueOf(claims.getSubject()),
                     claims.get("username", String.class)));
         } catch (JwtException | IllegalArgumentException e) {
-            // 无效令牌不抛出：调用方（JWT 过滤器）按匿名继续处理即可
+            // 无效令牌不抛出：调用方（JWT 过滤器）按匿名继续处理；这里打印具体原因便于排查"已登录仍 1010"
+            log.debug("JWT 解析失败（{}: {}），按匿名处理", e.getClass().getSimpleName(), e.getMessage());
             return Optional.empty();
         }
     }

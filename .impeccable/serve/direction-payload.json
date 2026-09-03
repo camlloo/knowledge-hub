@@ -1,0 +1,98 @@
+{
+  "title": "知识中枢 · 视觉方向",
+  "question": "骰子把方向指给了「深夜阅览室」。保留它、选一张备选卡，或重掷。",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "深夜阅览室",
+      "kicker": "THE ROLL",
+      "lineage": "公共阅览室的长桌、绿罩台灯与借书卡",
+      "thesis": "整个界面是一张深夜阅览室的长桌，台灯只照亮你正在整理的那摞文件。",
+      "palette": ["#1E2E26", "#2E4A3B", "#F1E9D6", "#B08D4A", "#8C3B2E"],
+      "materials": ["深绿漆木", "黄铜件", "灯下纸页", "借书卡"],
+      "viewport": "侧栏是房间暗部（分类架+导航），黄铜顶栏放搜索与上传，主区是灯下纸色的文件列表：表格/网格双模式，每行的状态是一枚斜盖的小章，收藏是黄铜折角标，配额是一根渐短的墨线。",
+      "risk": "深绿暖调若工艺不到位会滑向复古滤镜感；纪律在光池对比要真实、章节要克制。",
+      "raised": [
+        { "from": "challenger-cutting-bench", "raise": "状态是标记而非颜色：收藏=黄铜折角标，回收站=桌下待销毁托盘（剩余天数为倒计时签）" },
+        { "from": "challenger-jackfield", "raise": "目录树层级与配额用线形（实线/虚线/渐短线）而非色块表达" },
+        { "from": "challenger-streetwear", "raise": "空状态用直白文案命名自己：\"这张桌上还没有文件\"" }
+      ],
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "房间暗部 · 分类架侧栏", "x": 0, "y": 0, "w": 3, "h": 10 },
+        { "label": "黄铜顶栏 · 搜索/上传", "x": 3, "y": 0, "w": 9, "h": 1, "accent": true },
+        { "label": "灯下纸面 · 文件列表（表格/网格）", "x": 3, "y": 1, "w": 9, "h": 8 },
+        { "label": "状态章列", "x": 10.5, "y": 1, "w": 1.5, "h": 8 },
+        { "label": "桌沿 · 分页与配额墨线", "x": 3, "y": 9, "w": 9, "h": 1 }
+      ] },
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "卡片目录柜",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "图书馆卡片目录柜与黄铜拉手抽屉",
+      "thesis": "每个文件是一张编目卡：题名、标签、摘要；抽屉即目录，翻卡即检索。",
+      "palette": ["#E9E2D0", "#3B3630", "#7A2E2C"],
+      "materials": ["马尼拉卡纸", "打字机墨", "黄铜拉手"],
+      "viewport": "网格编目卡墙：每卡顶部打孔与编号、标签行、一行摘要；目录以抽屉沿分组导航。",
+      "risk": "是最像\"知识类产品默认答案\"的方向——熟悉好用，但少一点惊讶。",
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "抽屉沿 · 目录导航", "x": 0, "y": 0, "w": 12, "h": 1.5, "accent": true },
+        { "label": "编目卡墙 3×3", "x": 0, "y": 1.5, "w": 12, "h": 8.5 }
+      ] },
+      "comp": ".impeccable/mocks/decision/model-pick.webp"
+    },
+    {
+      "id": "challenger-cutting-bench",
+      "label": "剪辑工作台",
+      "verdict": "competitive",
+      "lineage": "电影剪辑台的选片架与工作样片",
+      "thesis": "整理文件即选片：夹住的帧是收藏，挂着的废弃片段是回收站。",
+      "palette": ["#0E0E10", "#E86A1C", "#F5F0E6"],
+      "materials": ["片基齿孔", "黄油笔", "胶带旗"],
+      "viewport": "一条齿孔选片轨横贯页面，文件作为打孔帧挂在轨上，你最近停留的位置折着一面橙色胶带旗。",
+      "case": "收藏/整理/回收的隐喻与产品严丝合缝，标记语言极清晰；输在黑底高密度长表的阅读负担。",
+      "risk": "橙色占屏三分之一时，密集表格场景容易视觉疲劳。",
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "齿孔选片轨 · 文件帧", "x": 0, "y": 1, "w": 12, "h": 5, "accent": true },
+        { "label": "挂钉区 · 回收站片段", "x": 0, "y": 6.5, "w": 12, "h": 3 },
+        { "label": "台灯标签 · 当前位置", "x": 0, "y": 0, "w": 12, "h": 1 }
+      ] },
+      "comp": ".impeccable/mocks/decision/challenger-cutting-bench.webp"
+    },
+    {
+      "id": "challenger-jackfield",
+      "label": "机房跳线面板",
+      "verdict": "declined",
+      "lineage": "机房门后的跳线 normals 表",
+      "palette": ["#0B0D0C", "#E8A33D"],
+      "materials": ["黑玻璃", "琥珀标记线"],
+      "case": "融合失败：机房黑玻璃与\"个人书桌整理知识\"的身份认同相悖。",
+      "kept": "状态用线的形态（实线/虚线/断口）而非颜色表达。",
+      "comp": ".impeccable/mocks/decision/challenger-jackfield.webp"
+    },
+    {
+      "id": "challenger-streetwear",
+      "label": "工业吊牌语法",
+      "verdict": "declined",
+      "lineage": "工业风街头服饰的吊牌与斜纹",
+      "palette": ["#F2F0EB", "#141414", "#E86A1C"],
+      "materials": ["斜纹织带", "直角标签牌"],
+      "case": "融合失败：潮流服饰语法与知识管理场景没有身份共鸣。",
+      "kept": "每个区域用直白引号命名自己。",
+      "comp": ".impeccable/mocks/decision/challenger-streetwear.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": true },
+  "canon": true,
+  "canonCard": {
+    "label": "品类的标准答案",
+    "thesis": "一个干净克制的现代网盘：白底、蓝色主色、类 Drive 布局，工艺到位。",
+    "palette": ["#FFFFFF", "#111827", "#2563EB"],
+    "materials": ["浅灰分隔", "线性图标"],
+    "viewport": "侧栏 + 工具条 + 表格列表的标准排布，以满分工艺执行。",
+    "risk": "与所有竞品无法区分——这是它的选择，也是它的代价。"
+  },
+  "steer": true
+}
